@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলাদেশের সংবাদপত্র - Patrika Ghar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #f8f9fa;
+            --dark: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1585829365295-ab7cd400c7e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background-color: var(--secondary);
+        }
+        
+        /* Newspaper Grid */
+        .newspaper-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .newspaper-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .newspaper-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .newspaper-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .card-desc {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .card-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo {
+                margin-bottom: 1rem;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                margin: 0 0.5rem 0.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 1.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .loading-text::after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">Patrika<span>Ghar</span></a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">হোম</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">পত্রিকা</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">বিভাগ</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">আমাদের সম্পর্কে</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">যোগাযোগ</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">বাংলাদেশের সমস্ত পত্রিকা এক ঠিকানায়</h1>
+            <p class="hero-subtitle">দেশের শীর্ষ সংবাদপত্রগুলোর ডিজিটাল সংগ্রহশালা। যেকোনো পত্রিকায় ক্লিক করে পড়ুন সর্বশেষ সংবাদ</p>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="পত্রিকা বা সংবাদ খুঁজুন...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <section>
+            <h2 class="section-title">জাতীয় দৈনিক পত্রিকা</h2>
+            <div class="newspaper-grid">
+                <!-- Newspaper 1 -->
+                <div class="newspaper-card" data-website="https://www.prothomalo.com" data-epaper="https://www.prothomalo.com/epaper">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/2c3e50/ffffff?text=প্রথম+আলো" alt="প্রথম আলো">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">প্রথম আলো</h3>
+                        <p class="card-desc">বাংলাদেশের সর্বাধিক প্রচারিত দৈনিক পত্রিকা</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 2 -->
+                <div class="newspaper-card" data-website="https://www.ittefaq.com.bd" data-epaper="https://epaper.ittefaq.com.bd">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/e74c3c/ffffff?text=ইত্তেফাক" alt="দৈনিক ইত্তেফাক">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক ইত্তেফাক</h3>
+                        <p class="card-desc">বাংলাদেশের প্রাচীন ও সম্মানিত দৈনিক</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 3 -->
+                <div class="newspaper-card" data-website="https://www.kalerkantho.com" data-epaper="https://epaper.kalerkantho.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/3498db/ffffff?text=কালের+কণ্ঠ" alt="কালের কণ্ঠ">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">কালের কণ্ঠ</h3>
+                        <p class="card-desc">আধুনিক সংবাদ পরিবেশনের অগ্রণী পত্রিকা</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 4 -->
+                <div class="newspaper-card" data-website="https://www.jugantor.com" data-epaper="https://epaper.jugantor.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/2ecc71/ffffff?text=যুগান্তর" alt="দৈনিক যুগান্তর">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক যুগান্তর</h3>
+                        <p class="card-desc">বাংলাদেশের জনপ্রিয় দৈনিক পত্রিকা</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 5 -->
+                <div class="newspaper-card" data-website="https://samakal.com" data-epaper="https://epaper.samakal.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/9b59b6/ffffff?text=সমকাল" alt="দৈনিক সমকাল">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক সমকাল</h3>
+                        <p class="card-desc">সত্যের আলোকে সমকাল</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 6 -->
+                <div class="newspaper-card" data-website="https://www.dailyinqilab.com" data-epaper="https://epaper.dailyinqilab.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/1abc9c/ffffff?text=ইনকিলাব" alt="দৈনিক ইনকিলাব">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক ইনকিলাব</h3>
+                        <p class="card-desc">বাংলাদেশের অন্যতম প্রভাবশালী দৈনিক</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="section-title">আঞ্চলিক পত্রিকা</h2>
+            <div class="newspaper-grid">
+                <!-- Newspaper 7 -->
+                <div class="newspaper-card" data-website="https://www.dailynayadiganta.com" data-epaper="https://epaper.dailynayadiganta.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/f39c12/ffffff?text=নয়া+দিগন্ত" alt="দৈনিক নয়া দিগন্ত">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক নয়া দিগন্ত</h3>
+                        <p class="card-desc">বাংলাদেশের প্রভাবশালী দৈনিক পত্রিকা</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 8 -->
+                <div class="newspaper-card" data-website="https://www.mzamin.com" data-epaper="https://epaper.mzamin.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/34495e/ffffff?text=মানবজমিন" alt="দৈনিক মানবজমিন">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক মানবজমিন</h3>
+                        <p class="card-desc">বাংলাদেশের অন্যতম প্রধান দৈনিক</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+                
+                <!-- Newspaper 9 -->
+                <div class="newspaper-card" data-website="https://www.dailyjanakantha.com" data-epaper="https://epaper.dailyjanakantha.com">
+                    <div class="card-img">
+                        <img src="https://via.placeholder.com/400x200/16a085/ffffff?text=জনকণ্ঠ" alt="দৈনিক জনকণ্ঠ">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">দৈনিক জনকণ্ঠ</h3>
+                        <p class="card-desc">বাংলাদেশের জনপ্রিয় দৈনিক সংবাদপত্র</p>
+                        <a href="#" class="card-btn website-link">ওয়েবসাইট দেখুন</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>PatrikaGhar</h3>
+                <p>বাংলাদেশের সমস্ত পত্রিকা এক ঠিকানায়। দেশের শীর্ষ সংবাদপত্রগুলোর ডিজিটাল সংগ্রহশালা।</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>লিংক</h3>
+                <ul class="footer-links">
+                    <li><a href="#">হোম</a></li>
+                    <li><a href="#">জাতীয় পত্রিকা</a></li>
+                    <li><a href="#">আঞ্চলিক পত্রিকা</a></li>
+                    <li><a href="#">আন্তর্জাতিক পত্রিকা</a></li>
+                    <li><a href="#">ই-পেপার</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>সাহায্য</h3>
+                <ul class="footer-links">
+                    <li><a href="#">সাধারণ প্রশ্ন</a></li>
+                    <li><a href="#">গোপনীয়তা নীতি</a></li>
+                    <li><a href="#">শর্তাবলী</a></li>
+                    <li><a href="#">যোগাযোগ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>যোগাযোগ</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt"></i> ঢাকা, বাংলাদেশ</li>
+                    <li><i class="fas fa-phone"></i> +880 1234 567890</li>
+                    <li><i class="fas fa-envelope"></i> info@patrikaghar.com</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2024 PatrikaGhar. সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div class="loading-text">লোড হচ্ছে</div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const websiteLinks = document.querySelectorAll('.website-link');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            websiteLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const card = this.closest('.newspaper-card');
+                    const websiteUrl = card.getAttribute('data-website');
+                    
+                    showLoading(websiteUrl);
+                });
+            });
+            
+            function showLoading(url) {
+                loadingOverlay.classList.add('active');
+                
+                setTimeout(() => {
+                    window.open(url, '_blank');
+                    loadingOverlay.classList.remove('active');
+                }, 1500);
+            }
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            
+            searchBtn.addEventListener('click', function() {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm) {
+                    alert('আপনি "' + searchTerm + '" খুঁজছেন। এই ফিচারটি সম্পূর্ণ সংস্করণে উপলব্ধ।');
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
